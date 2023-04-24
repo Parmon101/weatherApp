@@ -14,8 +14,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "jsEngine": "hermes",
     "ios": {
-      "supportsTablet": true
+      "jsEngine": "jsc"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,5 +27,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
+    
   }
 }
