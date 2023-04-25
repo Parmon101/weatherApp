@@ -1,86 +1,27 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-
-const WEATHER_OPTIONS = {
-  Thunderstorm: {
-    iconName: 'lightning',
-    gradient: ['#141E30', '#243B55'],
-    title: 'Сиди дома',
-    subtitle: 'Ты видишь что на улице?',
-  },
-  Drizzle: {
-    iconName: 'rainy',
-    gradient: ['#3a7bd5', '#3a6073'],
-    title: 'Возьми зонтик',
-    subtitle: 'Возможно скоро дождь усилится ',
-  },
-  Rain: {
-    iconName: 'pouring',
-    gradient: ['#000046', '#1CB5E0'],
-    title: 'На улице дождь',
-    subtitle: 'А значит скоро будет радуга!',
-  },
-  Snow: {
-    iconName: 'snowflake',
-    gradient: ['#83a4d4', '#b6fbff'],
-    title: 'На улице снежок!',
-    subtitle: 'Одевайтесь потеплее, лепите снеговиков',
-  },
-  Sunny: {
-    iconName: 'sunny',
-    gradient: ['#83a4d4', '#b6fbff'],
-    title: 'На улице снежок!',
-    subtitle: 'Одевайтесь потеплее, лепите снеговиков',
-  },
-  Dust: {
-    iconName: 'windy-variant',
-    gradient: ['#B79891', '#94716B'],
-    title: 'Пыльно',
-    subtitle: 'Лучше закройте окна',
-  },
-  Smoke: {
-    iconName: 'windy',
-    gradient: ['#56CCF2', '#2F80ED'],
-    title: 'На улице смог :(',
-    subtitle: 'Не советую выходить без необходимости',
-  },
-  Haze: {
-    iconName: 'hazy',
-    gradient: ['#3E5151', '#DECBA4'],
-    title: 'На улице снежок!',
-    subtitle: 'Одевайтесь потеплее, лепите снеговиков',
-  },
-  Mist: {
-    iconName: 'fog',
-    gradient: ['#606c88', '#3f4c6b'],
-    title: 'Ни черта не видно в тумане',
-    subtitle: 'Зато как в Сайлент-Хилле :)',
-  },
-  Clear: {
-    iconName: 'sunny',
-    gradient: ['#56CCF2', '#2F80ED'],
-    title: 'Погода супер :)',
-    subtitle: 'Иди гулять, хватит сидеть дома!',
-  },
-  Clouds: {
-    iconName: 'cloudy',
-    gradient: ['#757F9A', '#D7DDE8'],
-    title: 'Облака',
-    subtitle: 'Белогривые лошадки',
-  },
-};
+import { WEATHER_OPTIONS } from './constants';
 
 export default function Weather({ temp, condition }) {
   return (
     <LinearGradient colors={WEATHER_OPTIONS[condition].gradient} style={s.container}>
       <StatusBar barStyle="light-content" />
       <View style={s.topHalfContainer}>
-        <Ionicons name={WEATHER_OPTIONS[condition].iconName} size={90} color="grey" />
-        <Text style={s.text}>{temp}°</Text>
+        <MaterialCommunityIcons
+          name={WEATHER_OPTIONS[condition].iconName}
+          size={90}
+          color="white"
+        />
+        <Text style={s.temp}>{temp}°</Text>
       </View>
+      <View style={{ ...s.bottomHalfContainer, ...s.textContainer }}>
+        <Text style={s.title}>{WEATHER_OPTIONS[condition].title}</Text>
+        <Text style={s.subtitle}>{WEATHER_OPTIONS[condition].subtitle}</Text>
+      </View>
+
       <View style={s.bottomHalfContainer}></View>
     </LinearGradient>
   );
@@ -93,7 +34,11 @@ Weather.propTypes = {
     'Drizzle',
     'Rain',
     'Snow',
-    'Atmosphere',
+    'Sunny',
+    'Dust',
+    'Smoke',
+    'Haze',
+    'Mist',
     'Clear',
     'Clouds',
   ]).isRequired,
@@ -110,11 +55,26 @@ const s = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
+  bottomHalfContainer: {
+    flex: 1,
+  },
+  temp: {
     fontSize: 42,
     color: 'white',
   },
-  bottomHalfContainer: {
-    flex: 1,
+  title: {
+    color: 'white',
+    fontSize: 44,
+    fontWeight: '300',
+    marginBottom: 10,
+  },
+  subtitle: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  textContainer: {
+    paddingHorizontal: 20,
+    alignItems: 'flex-start',
   },
 });
