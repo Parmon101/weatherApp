@@ -17,7 +17,6 @@ const s = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingHorizontal: 30,
     paddingVertical: 100,
-    backgroundColor: '#fdf6aaya',
   },
   text: {
     color: '#2c2c2c',
